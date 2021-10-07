@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const {makeBadge, ValidationError}= require('badge-maker');
 // const generateMarkDown = require("./generatemarkdown");
 
 
@@ -78,30 +79,47 @@ const fs = require("fs");
 const generateMarkDown =(data) => 
     `# ${data.title} 
       
-     #Table of Contents:
-      [Description](#description)
-      Installation
-      Usage
-      Guidelines
-      Testing
-      License 
-      [Questions](#questions)
+     ##Table of Contents:
+      [Description] (#Description)
+      [Installation] (#Installation)
+      [Usage] (#Usage)
+      [Guidelines] (#Guidelines)
+      [Testing] (#Testing)
+      [License] (#License)
+      [Questions] (#Questions) 
+      
+      
    
-      #<a name = "description"></a> ##Description:
-      ${data.description}\n
+      ##Description:
+
+      ${data.description}
+
       ##Installation:
-      ${data.installation}\n
+
+      ${data.installation}
+
       ##Usage:
-      ${data.usage}\n
+
+      ${data.usage}
+
       ##Guidelines:
-      ${data.guidelines}\n
+
+      ${data.guidelines}
+
       ##Testing:
-      ${data.testing}\n
-      ##License:
-      ${data.license}\n
-      #<a name ="questions"></a>  ##Questions: \n
+
+      ${data.testing}
+
+      ##Questions: 
+
       GitHub:[GitHub Profile] (https://github.com/${data.github})
+
       Email: Contact me at : ${data.email} with any questions you may have!
+      
+      ##License:
+
+      ${data.license}
+
       
    `;
    inquirer.prompt([
@@ -136,20 +154,20 @@ const generateMarkDown =(data) =>
         name: "yesting",
     },
     {
-        type: "list",
-        message: "Please Select a license.",
-        name: "license",
-        choices: ["Public", "Apache", "BSD", "MIT", "LGPL", "GPL", "Proprietary"]
-    },
-    {
         type: "input",
-        message: "Enter your GitHub userName?",
+        message: "Enter your GitHub userName.",
         name: "github",
     },
     {
-    type:"input",
-    message:"Enter your email?",
-    name:"email",
+        type:"input",
+        message:"Enter your email.",
+        name:"email",
+    },
+    {
+        type: "list",
+        message: "Please Select a license.",
+        name: "license",
+        choices: ["MIT", "GNU AGPLv3", "APACHE", "Unlicencse" ,"None"]
     },
 ])
 .then((data) => {
