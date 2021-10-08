@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const {makeBadge, ValidationError}= require('badge-maker');
+const { makeBadge, ValidationError } = require('badge-maker');
 // const generateMarkDown = require("./generatemarkdown");
 
 
@@ -76,7 +76,7 @@ const {makeBadge, ValidationError}= require('badge-maker');
 // Function call to initialize app
 // init();
 
-const generateMarkDown =(data) => 
+const generateMarkDown = (data) =>
     `# ${data.title} 
       
      ##Table of Contents:
@@ -115,14 +115,15 @@ const generateMarkDown =(data) =>
       GitHub:[GitHub Profile] (https://github.com/${data.github})
 
       Email: Contact me at : ${data.email} with any questions you may have!
-      
+
       ##License:
 
-      ${data.license}
+      https://choosealicense.com/licenses/${data.license}/
 
       
    `;
-   inquirer.prompt([
+
+inquirer.prompt([
     {
         type: "input",
         message: "What is the title of your project?",
@@ -159,21 +160,23 @@ const generateMarkDown =(data) =>
         name: "github",
     },
     {
-        type:"input",
-        message:"Enter your email.",
-        name:"email",
+        type: "input",
+        message: "Enter your email.",
+        name: "email",
     },
     {
         type: "list",
         message: "Please Select a license.",
         name: "license",
-        choices: ["MIT", "GNU AGPLv3", "APACHE", "Unlicencse" ,"None"]
+        choices: ["mit", "apgl-3.0", "apache-2.0", "unlicense",]
     },
 ])
-.then((data) => {
-    const markDownContent = generateMarkDown(data);
+    .then((data) => {
+        const markDownContent = generateMarkDown(data);
 
-    fs.writeFile('readMeExp.md', markDownContent, (err) =>
-      err ? console.log(err) : console.log('Successfully created ReadMe!')
-    );
-   });  
+        fs.writeFile('readMeExp.md', markDownContent, (err) =>
+            err ? console.log(err) : console.log('Successfully created ReadMe!')
+        );
+    });
+
+
