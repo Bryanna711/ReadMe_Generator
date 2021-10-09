@@ -78,24 +78,25 @@
 // module.exports = generateMarkDown
 
 
-const renderLicenseLink = (data) => {
-    if (data.license === "None") {
+const renderLicenseLink = (license) => {
+    var license= data.license
+    if (license === "None") {
         return ""
     }
-    if (data.license === "Unlicense") {
+    if (license === "Unlicense") {
         return "https://choosealicense.com/licenses/unlicense/"
     }
-    if (data.license === "MIT") {
+    if (license === "MIT") {
         return "https://choosealicense.com/licenses/mit/"
     }
-    if (data.license === "APACHE") {
+    if (license === "APACHE") {
         return "https://choosealicense.com/licenses/apache-2.0/"
     }
-    if (data.license === "GNU AGPLv3") {
+    if (license === "GNU AGPLv3") {
         return "https://choosealicense.com/licenses/agpl-3.0/"
     }
-    // const licenseLink = renderLicenseLink(data);
-    // fs.appendFile("readMeExp.md", licenseLink, (err) =>
-    //     err ? console.log(err) : console.log('Successfully appended link!'))
+    const licenseLink = renderLicenseLink(license);
+    fs.appendFile("readMeExp.md", licenseLink, (err) =>
+        err ? console.log(err) : console.log('Successfully appended link!'))
 }
 
